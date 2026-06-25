@@ -293,18 +293,6 @@
 
         .poster-info-container > div { position: relative; z-index: 1; }
 
-        .paw-print {
-            position: absolute;
-            right: 18px;
-            bottom: 30px;
-            transform: rotate(-20deg);
-            width: 6.3rem;
-            height: 6.3rem;
-            opacity: 0.5;
-            z-index: 10; 
-            pointer-events: none;
-        }
-
         .info-breed { 
             font-size: 1.05rem; font-weight: 700; 
             padding-bottom: 6px; 
@@ -566,7 +554,6 @@
                 </div>
                 
                 <div class="poster-info-container">
-                    <img class="paw-print" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMTAxLjA4MTU5NDU1OTk2MTk2IDEzMi40MDE5MDYyMTgxODA2IDE5Ljg4NzUxMjQxNzE2MDA1MyAyMC42Mzg0Mjc3NjMwMTYxODIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggc3R5bGU9ImZpbGw6I0ZGRkZGRiIgZD0ibSAxMTMuMjkyODMsMTUxLjc3NzA1IGMgLTEuODE5NzMsMC42MTg3NCAtMy40Mjg1NCwwLjEyNzAxIC00LjE0MTA3LC0xLjI2NTcgLTAuMzk0NTcsLTAuNzcxMjQgLTAuNDI0NTcsLTEuMzQ5MjkgLTAuMTUxNTUsLTIuOTIwOTkgMC4xMzA5OSwtMC43NTQwOSAwLjE1MDYsLTEuNTQyMjQgMC4wNDM2LC0xLjc1MTQ0IC0wLjI0NzMsLTAuNDgzMzcgMC4wNDk2LC0xLjI4MjM5IDAuOTM4MDEsLTIuNTI0NCAwLjY0ODI2LC0wLjkwNjI2IDAuNzcxODcsLTAuOTk2MzIgMS42NDIzNywtMS4xOTY2OCAyLjMyMDQ3LC0wLjUzNDA4IDYuMzkyMzIsMS4xNjc5IDcuODYwNTgsMy4yODU2NSAwLjQ3Nzc3LDAuNjg5MSAwLjU2NTcyLDEuNTQ4NzYgMC4xNzg3MSwxLjc0Njc2IC0wLjEzMzU3LDAuMDY4MyAtMC4yNzc0OSwwLjI3OTMyIC0wLjMxOTg0LDAuNDY4ODUgLTAuMDcyMiwwLjMyMzMyIC0wLjc1NjA4LDAuODg1OTYgLTMuNDA4MTYsMi44MDQxMSAtMS4xOTYzMiwwLjg2NTI1IC0xLjE3Nzg1LDAuODU1NzkgLTIuNjQyNDYsMS4zNTQxNiB6IG0gLTcuMzIwNDQsLTMuMDE4NzMgYyAtMC4zMzg2LC0wLjA0ODQgLTAuNzc2MTgsLTAuMTY0NjMgLTAuOTcyMzksLTAuMjU4MzIgLTAuNTkwMzksLTAuMjgxODggLTIuMjg4LC0yLjA5OTIxIC0yLjY4NDA2LC0yLjg3MzM1IC0wLjMzMSwtMC42NDY5OCAtMC4zMjExNSwtMC43NzgzNSAwLjA5MjIsLTEuMjMzNzYgMC4zOTYzNywtMC40MzY3NSAwLjU2ODE4LC0wLjUwMTE4IDEuMjAwMTksLTAuNDUwMDcgMi4xMDYzOCwwLjE3MDMxIDQuNDQ0NjIsMi4xODc4MyA0LjIxMzI3LDMuNjM1MzcgLTAuMTAyOSwwLjY0Mzg5IC0xLjEwODkzLDEuMjg1OTIgLTEuODQ5MTYsMS4xODAxMyB6IG0gMTIuMDY4ODcsLTYuNDAzNDggYyAtMC40ODAzNCwwLjAzNTggLTEuMzI2NjQsLTAuNzA2MzcgLTEuNzUwNzgsLTEuNTM1MzkgLTAuNDY1MzQsLTAuOTA5NTggLTAuNTIzMywtMS44NDMzOCAtMC4xODczNCwtMy4wMTg1MyAwLjMyMTMzLC0xLjEyMzk1IDEuMzg3OTEsLTEuNzAxNzcgMi4zMzc0NCwtMS4yNjYyOSAwLjU0MTIyLDAuMjQ4MjMgMC43Mjc2MSwwLjQ4MjM1IDEuMTQwNTksMS40MzI3MSAwLjQwNzI3LDAuOTM3MjMgMC40NjE3MiwxLjM0ODY2IDAuMzExMTksMi4zNTE1MyAtMC4xNjE0LDEuMDc1MjYgLTAuMjYyNjIsMS4yNjE2OCAtMC44NzcwNCwxLjYxNTM1IC0wLjM4MjAxLDAuMjE5OTMgLTAuODIwMTgsMC40MDk1MSAtMC45NzQwNiwwLjQyMDYxIHogbSAtMTEuMjM5ODksMC4zMjE0OCBjIC0wLjk4Mjc1LC0wLjIyNjU5IC0yLjA5MTAyLC0xLjMzMjA0IC0zLjAwMDUsLTIuOTkyODUgLTAuNjA0OTYsLTEuMTA0NzMgLTAuNzI3OTUsLTEuNDc5NyAtMC42MDc1NSwtMS44NTIzNSAwLjIwODQyLC0wLjY0NTA3IDEuNDA4NDYsLTEuMjMyNDIgMi4xMjQ1OSwtMS4wMzk5IDEuODkwMTcsMC41MDgyMyAzLjkyNTg1LDMuOTYzNTggMy4wMjgwMiw1LjEzOTc2IC0wLjYxNTQ4LDAuODA2MzEgLTAuODMwMzQsMC45MDk5OSAtMS41NDQ1OCwwLjc0NTMgeiBtIDQuNTQ2MjgsLTMuMjQ0MzIgYyAtMC42MjIxNiwtMC4yMDEwMiAtMC43MzgwOCwtMC4zNDc2IC0xLjU4Njc0LC0yLjAwNjQgLTAuNzU1MSwtMS40NzU5MSAtMC44OTE3MiwtMS44ODYzMiAtMC43Nzk0OSwtMi4zNDE4MSAwLjIxMTQ2LC0wLjg1ODM2IDAuODEyMzIsLTEuNDE2NDQgMS43MzcwNywtMS42MTM0MSAxLjEwMTksLTAuMjM0NyAxLjYzNzExLDAuMTA0MDcgMi4zNDIzOSwxLjQ4MjYyIDAuNzA1MTEsMS4zNzgyIDAuNzcxNzUsMi42NjU5NyAwLjE4NzI3LDMuNjE4NTIgLTAuNTMzODEsMC44Njk5NyAtMS4wOTA3MSwxLjEyMjExIC0xLjkwMDUxLDAuODYwNDUgeiIvPjwvc3ZnPg==" alt="paw">
 
                     <div class="info-breed" id="renderBreed">中华田园犬，亲人</div>
                     <div class="info-grid">
@@ -588,6 +575,8 @@
                             <div class="stamp-en"><span>P</span><span>E</span><span>T</span><span>A</span><span>D</span><span>O</span><span>P</span><span>T</span><span>I</span><span>O</span><span>N</span></div>
                         </div>
                     </div>
+                    
+                    <img id="posterPaw" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNy44ODc1MTIgMTguNjM4NDI5Ij48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTAyLjA4MTU5LC0xMzMuNDAxOTEpIj48cGF0aCBzdHlsZT0iZmlsbDojZmZmZmZmIiBkPSJtIDExMy4yOTI4MywxNTEuNzc3MDUgYyAtMS44MTk3MywwLjYxODc0IC0zLjQyODU0LDAuMTI3MDEgLTQuMTQxMDcsLTEuMjY1NyAtMC4zOTQ1NywtMC43NzEyNCAtMC40MjQ1NywtMS4zNDkyOSAtMC4xNTE1NSwtMi45MjA5OSAwLjEzMDk5LC0wLjc1NDA5IDAuMTUwNiwtMS41NDIyNCAwLjA0MzYsLTEuNzUxNDQgLTAuMjQ3MywtMC40ODMzNyAwLjA0OTYsLTEuMjgyMzkgMC45MzgwMSwtMi41MjQ0IDAuNjQ4MjYsLTAuOTA2MjYgMC43NzE4NywtMC45OTYzMiAxLjY0MjM3LC0xLjE5NjY4IDIuMzIwNDcsLTAuNTM0MDggNi4zOTIzMiwxLjE2NzkgNy44NjA1OCwzLjI4NTY1IDAuNDc3NzcsMC42ODkxIDAuNTY1NzIsMS41NDg3NiAwLjE3ODcxLDEuNzQ2NzYgLTAuMTMzNTcsMC4wNjgzIC0wLjI3NzQ5LDAuMjc5MzIgLTAuMzE5ODQsMC40Njg4NSAtMC4wNzIyLDAuMzIzMzIgLTAuNzU2MDgsMC44ODU5NiAtMy40MDgxNiwyLjgwNDExIC0xLjE5NjMyLDAuODY1MjUgLTEuMTc3ODUsMC44NTU3OSAtMi42NDI0NiwxLjM1NDE2IHogbSAtNy4zMjA0NCwtMy4wMTg3MyBjIC0wLjMzODYsLTAuMDQ4NCAtMC43NzYxOCwtMC4xNjQ2MyAtMC45NzIzOSwtMC4yNTgzMiAtMC41OTAzOSwtMC4yODE4OCAtMi4yODgsLTIuMDk5MjEgLTIuNjg0MDYsLTIuODczMzUgLTAuMzMxLC0wLjY0Njk4IC0wLjMyMTE1LC0wLjc3ODM1IDAuMDkyMiwtMS4yMzM3NiAwLjM5NjM3LC0wLjQzNjc1IDAuNTY4MTgsLTAuNTAxMTggMS4yMDAxOSwtMC40NTAwNyAyLjEwNjM4LDAuMTcwMzEgNC40NDQ2MiwyLjE4NzgzIDQuMjEzMjcsMy42MzUzNyAtMC4xMDI5LDAuNjQzODkgLTEuMTA4OTMsMS4yODU5MiAtMS44NDkxNiwxLjE4MDEzIHogbSAxMi4wNjg4NywtNi40MDM0OCBjIC0wLjQ4MDM0LDAuMDM1OCAtMS4zMjY2NCwtMC43MDYzNyAtMS43NTA3OCwtMS41MzUzOSAtMC40NjUzNCwtMC45MDk1OCAtMC41MjMzLC0xLjg0MzM4IC0wLjE4NzM0LC0zLjAxODUzIDAuMzIxMzMsLTEuMTIzOTUgMS4zODc5MSwtMS43MDE3NyAyLjMzNzQ0LC0xLjI2NjI5IDAuNTQxMjIsMC4yNDgyMyAwLjcyNzYxLDAuNDgyMzUgMS4xNDA1OSwxLjQzMjcxIDAuNDA3MjcsMC45MzcyMyAwLjQ2MTcyLDEuMzQ4NjYgMC4zMTExOSwyLjM1MTUzIC0wLjE2MTQsMS4wNzUyNiAtMC4yNjI2MiwxLjI2MTY4IC0wLjg3NzA0LDEuNjE1MzUgLTAuMzgyMDEsMC4yMTk5MyAtMC44MjAxOCwwLjQwOTUxIC0wLjk3NDA2LDAuNDIwNjEgeiBtIC0xMS4yMzk4OSwwLjMyMTQ4IGMgLTAuOTgyNzUsLTAuMjI2NTkgLTIuMDkxMDIsLTEuMzMyMDQgLTMuMDAwNSwtMi45OTI4NSAtMC42MDQ5NiwtMS4xMDQ3MyAtMC43Mjc5NSwtMS40Nzk3IC0wLjYwNzU1LC0xLjg1MjM1IDAuMjA4NDIsLTAuNjQ1MDcgMS40MDg0NiwtMS4yMzI0MiAyLjEyNDU5LC0xLjAzOTkgMS44OTAxNywwLjUwODIzIDMuOTI1ODUsMy45NjM1OCAzLjAyODAyLDUuMTM5NzYgLTAuNjE1NDgsMC44MDYzMSAtMC44MzAzNCwwLjkwOTk5IC0xLjU0NDU4LDAuNzQ1MyB6IG0gNC41NDYyOCwtMy4yNDQzMiBjIC0wLjYyMjE2LC0wLjIwMTAyIC0wLjczODA4LC0wLjM0NzYgLTEuNTg2NzQsLTIuMDA2NCAtMC43NTUxLC0xLjQ3NTkxIC0wLjg5MTcyLC0xLjg4NjMyIC0wLjc3OTQ5LC0yLjM0MTgxIDAuMjExNDYsLTAuODU4MzYgMC44MTIzMiwtMS40MTY0NCAxLjczNzA3LC0xLjYxMzQxIDEuMTAxOSwtMC4yMzQ3IDEuNjM3MTEsMC4xMDQwNyAyLjM0MjM5LDEuNDgyNjIgMC43MDUxMSwxLjM3ODIgMC43NzE3NSwyLjY2NTk3IDAuMTg3MjcsMy42MTg1MiAtMC41MzM4MSwwLjg2OTk3IC0xLjA5MDcxLDEuMTIyMTEgLTEuOTAwNTEsMC44NjA0NSB6IiAvPjwvZz48L3N2Zz4=" style="position: absolute; right: 18px; bottom: calc(15px + 1.05rem); width: 5.04rem; height: 5.04rem; z-index: 100; opacity: 0.45; pointer-events: none;" />
                 </div>
             </div>
         </div>
@@ -1003,21 +992,43 @@
         const waveBack = document.querySelector('.wave-back-svg');
         const logo = document.querySelector('#posterLogo');
         
-        // --- Bulletproof strategy: convert SVG waves to static <img> tags ---
-        // html2canvas has persistent bugs with inline SVG + CSS animations/positioning.
-        // By serializing to data-URL images, we completely bypass all SVG rendering issues.
+        // --- Bulletproof strategy: convert SVG waves and watermark to static PNG <img> tags ---
+        // html2canvas has persistent bugs with SVG + CSS animations/positioning/useCORS.
+        // By converting them to static PNG data-URLs at runtime, we bypass all SVG bugs.
         
         const overlayRect = waveOverlay.getBoundingClientRect();
         
-        function svgToStaticImg(svgEl) {
-            // 1. Capture current visual position relative to parent
+        function imgSvgToPng(imgEl) {
+            return new Promise((resolve) => {
+                const rect = imgEl.getBoundingClientRect();
+                const widthPx = rect.width;
+                const heightPx = rect.height;
+                
+                const img = new Image();
+                img.crossOrigin = 'anonymous';
+                img.src = imgEl.src;
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = widthPx * 2;
+                    canvas.height = heightPx * 2;
+                    const ctx = canvas.getContext('2d');
+                    ctx.scale(2, 2);
+                    ctx.drawImage(img, 0, 0, widthPx, heightPx);
+                    resolve(canvas.toDataURL('image/png'));
+                };
+                img.onerror = () => {
+                    resolve(null);
+                };
+            });
+        }
+
+        async function svgToStaticImg(svgEl) {
             const rect = svgEl.getBoundingClientRect();
             const leftPx = rect.left - overlayRect.left;
             const topPx = rect.top - overlayRect.top;
             const widthPx = rect.width;
             const heightPx = rect.height;
             
-            // 2. Clone SVG with current fill colors baked in
             const clone = svgEl.cloneNode(true);
             clone.removeAttribute('class');
             clone.removeAttribute('style');
@@ -1025,14 +1036,30 @@
             clone.setAttribute('width', String(widthPx));
             clone.setAttribute('height', String(heightPx));
             
-            // 3. Serialize to data URL
             const serializer = new XMLSerializer();
             const svgString = serializer.serializeToString(clone);
             const dataUrl = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
             
-            // 4. Create a plain <img> element positioned identically
+            const pngUrl = await new Promise((resolve) => {
+                const img = new Image();
+                img.crossOrigin = 'anonymous';
+                img.src = dataUrl;
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = widthPx * 2;
+                    canvas.height = heightPx * 2;
+                    const ctx = canvas.getContext('2d');
+                    ctx.scale(2, 2);
+                    ctx.drawImage(img, 0, 0, widthPx, heightPx);
+                    resolve(canvas.toDataURL('image/png'));
+                };
+                img.onerror = () => {
+                    resolve(null);
+                };
+            });
+            
             const img = document.createElement('img');
-            img.src = dataUrl;
+            img.src = pngUrl || dataUrl;
             img.style.cssText = 'position:absolute;' +
                 'left:' + leftPx + 'px;' +
                 'top:' + topPx + 'px;' +
@@ -1042,9 +1069,9 @@
         }
         
         // Capture current wave positions as static images BEFORE stopping animations
-        const backImg = svgToStaticImg(waveBack);
+        const backImg = await svgToStaticImg(waveBack);
         backImg.style.zIndex = '1';
-        const mainImg = svgToStaticImg(waveMain);
+        const mainImg = await svgToStaticImg(waveMain);
         mainImg.style.zIndex = '2';
         
         // Save original wave overlay HTML (includes current fill attributes)
@@ -1059,6 +1086,17 @@
         if (logo) {
             logo.style.animation = 'none';
             logo.style.transform = 'none';
+        }
+
+        // Convert paw SVG watermark to PNG in-place
+        const pawImgEl = document.getElementById('posterPaw');
+        let originalPawSrc = '';
+        if (pawImgEl) {
+            originalPawSrc = pawImgEl.src;
+            const pngUrl = await imgSvgToPng(pawImgEl);
+            if (pngUrl) {
+                pawImgEl.src = pngUrl;
+            }
         }
 
         await new Promise(resolve => setTimeout(resolve, 100)); 
@@ -1088,6 +1126,11 @@
             waveOverlay.innerHTML = originalWaveHTML;
             if (logo) { logo.style.animation = ''; logo.style.transform = ''; }
             
+            // Restore original paw SVG src
+            if (pawImgEl && originalPawSrc) {
+                pawImgEl.src = originalPawSrc;
+            }
+            
             posterWrap.style.transform = originalTransform;
             // Force reflow to prevent animation jumping
             void posterWrap.offsetWidth;
@@ -1096,6 +1139,7 @@
             exportBtn.disabled = false;
         }
     }
+
 
     function closeModal() {
         document.getElementById('resultModal').style.display = 'none';
