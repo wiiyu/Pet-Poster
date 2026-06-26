@@ -35,7 +35,8 @@
             background-image: linear-gradient(var(--bg-color), var(--bg-color));
             color: var(--primary-color);
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
             padding: 2rem 1rem;
         }
 
@@ -462,10 +463,11 @@
 </head>
 <body>
 
-<div style="display: flex; flex-direction: column; width: 100%; max-width: 1200px;">
-    <div class="container">
-    <div class="form-section">
-        <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;">输入宠物资料<img src="logo.png" alt="Logo" style="height: calc(1.5rem + 5px); width: auto;"></h2>
+        <div style="font-size: 0.75rem; color: #888888; font-weight: normal; font-family: system-ui, -apple-system, sans-serif; text-align: left; margin-bottom: 0.2rem; opacity: 0.8;">Project Harbor</div>
+        <h2 style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; font-size: 24px;">
+            <span>输入宠物资料</span>
+            <img class="frame-logo" id="headerLogo" src="data:image/png;base64,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" alt="Logo" style="height: 29px; width: auto;" />
+        </h2>
         <div class="form-group">
             <label>上传照片</label>
             <input type="file" id="inputPhoto" accept="image/png, image/jpeg, image/webp">
@@ -582,11 +584,12 @@
             </div>
         </div>
         <button class="export-btn" onclick="exportPoster()">保存海报</button>
-        <div class="export-tip" id="exportTip" style="display: none; color: #bdc3c7; font-size: 0.75rem; margin-top: 0.6rem; text-align: center; opacity: 0.6;">长按图片可保存海报</div>
     </div>
 </div>
-    <div style="text-align: right; font-size: 0.85rem; color: #7f8c8d; font-weight: normal; font-family: system-ui, -apple-system, sans-serif; margin-top: 1rem;">v1.2.1</div>
-</div>
+
+<footer style="width: 100%; max-width: 1200px; text-align: right; font-size: 0.85rem; color: #7f8c8d; font-family: system-ui, -apple-system, sans-serif; font-weight: normal; padding: 1rem 0; margin-top: 1rem; box-sizing: border-box;">
+    v1.2.1
+</footer>
 
 <!-- 生成结果弹窗 -->
 <div id="resultModal" class="modal-overlay" style="display: none;">
