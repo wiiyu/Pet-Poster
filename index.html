@@ -8,7 +8,7 @@
     <meta name="supported-color-schemes" content="light">
     <meta name="nightmode" content="disable">
     <meta name="force-dark-mode" content="false">
-    <title>宠物领养海报生成器 v1.2.0</title>
+    <title>宠物领养海报生成器 v1.2.1</title>
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     
     <!-- Yozai 字体调用 -->
@@ -464,7 +464,7 @@
 
 <div class="container">
     <div class="form-section">
-        <h2 style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">输入宠物资料<span style="font-size: 0.85rem; color: #7f8c8d; font-weight: normal; font-family: system-ui, -apple-system, sans-serif;">v1.2.0</span></h2>
+        <h2 style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">输入宠物资料<span style="font-size: 0.85rem; color: #7f8c8d; font-weight: normal; font-family: system-ui, -apple-system, sans-serif;">v1.2.1</span></h2>
         <div class="form-group">
             <label>上传照片</label>
             <input type="file" id="inputPhoto" accept="image/png, image/jpeg, image/webp">
@@ -972,11 +972,6 @@
         const posterWrap = document.getElementById('posterWrapper');
         const posterNode = document.getElementById('posterElement');
         
-        const originalTransform = posterWrap.style.transform;
-        const originalTransition = posterWrap.style.transition;
-        posterWrap.style.transition = 'none'; 
-        posterWrap.style.transform = 'none'; 
-        
         const exportBtn = document.querySelector('.export-btn');
         const originalBtnText = exportBtn.textContent;
         exportBtn.textContent = '生成中...';
@@ -987,16 +982,37 @@
             exportTip.style.display = 'block';
         }
 
-        const waveOverlay = document.querySelector('.wave-overlay');
-        const waveMain = document.querySelector('.wave-main-svg');
-        const waveBack = document.querySelector('.wave-back-svg');
-        const logo = document.querySelector('#posterLogo');
+        // Clone the poster node to render it offscreen in its native size (scale 1)
+        const clone = posterNode.cloneNode(true);
+        const tempWrapper = document.createElement('div');
+        tempWrapper.className = 'poster-wrapper';
+        tempWrapper.style.position = 'absolute';
+        tempWrapper.style.left = '-9999px';
+        tempWrapper.style.top = '-9999px';
+        tempWrapper.style.transform = 'none';
+        tempWrapper.style.transition = 'none';
+        tempWrapper.appendChild(clone);
+        document.body.appendChild(tempWrapper);
+
+        const originalWaveOverlay = posterNode.querySelector('.wave-overlay');
+        const originalWaveMain = posterNode.querySelector('.wave-main-svg');
+        const originalWaveBack = posterNode.querySelector('.wave-back-svg');
         
-        // --- Bulletproof strategy: convert SVG waves and watermark to static PNG <img> tags ---
-        // html2canvas has persistent bugs with SVG + CSS animations/positioning/useCORS.
-        // By converting them to static PNG data-URLs at runtime, we bypass all SVG bugs.
+        const overlayRect = originalWaveOverlay.getBoundingClientRect();
+        const scale = posterViewScale || 1;
         
-        const overlayRect = waveOverlay.getBoundingClientRect();
+        function getUnscaledSvgMetrics(svgEl) {
+            const rect = svgEl.getBoundingClientRect();
+            return {
+                left: (rect.left - overlayRect.left) / scale,
+                top: (rect.top - overlayRect.top) / scale,
+                width: rect.width / scale,
+                height: rect.height / scale
+            };
+        }
+        
+        const backMetrics = getUnscaledSvgMetrics(originalWaveBack);
+        const mainMetrics = getUnscaledSvgMetrics(originalWaveMain);
         
         function imgSvgToPng(imgEl) {
             return new Promise((resolve) => {
@@ -1022,22 +1038,16 @@
             });
         }
 
-        async function svgToStaticImg(svgEl) {
-            const rect = svgEl.getBoundingClientRect();
-            const leftPx = rect.left - overlayRect.left;
-            const topPx = rect.top - overlayRect.top;
-            const widthPx = rect.width;
-            const heightPx = rect.height;
-            
-            const clone = svgEl.cloneNode(true);
-            clone.removeAttribute('class');
-            clone.removeAttribute('style');
-            clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-            clone.setAttribute('width', String(widthPx));
-            clone.setAttribute('height', String(heightPx));
+        async function svgToStaticImg(svgEl, metrics) {
+            const svgClone = svgEl.cloneNode(true);
+            svgClone.removeAttribute('class');
+            svgClone.removeAttribute('style');
+            svgClone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+            svgClone.setAttribute('width', String(metrics.width));
+            svgClone.setAttribute('height', String(metrics.height));
             
             const serializer = new XMLSerializer();
-            const svgString = serializer.serializeToString(clone);
+            const svgString = serializer.serializeToString(svgClone);
             const dataUrl = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
             
             const pngUrl = await new Promise((resolve) => {
@@ -1046,11 +1056,11 @@
                 img.src = dataUrl;
                 img.onload = () => {
                     const canvas = document.createElement('canvas');
-                    canvas.width = widthPx * 2;
-                    canvas.height = heightPx * 2;
+                    canvas.width = metrics.width * 2;
+                    canvas.height = metrics.height * 2;
                     const ctx = canvas.getContext('2d');
                     ctx.scale(2, 2);
-                    ctx.drawImage(img, 0, 0, widthPx, heightPx);
+                    ctx.drawImage(img, 0, 0, metrics.width, metrics.height);
                     resolve(canvas.toDataURL('image/png'));
                 };
                 img.onerror = () => {
@@ -1061,41 +1071,36 @@
             const img = document.createElement('img');
             img.src = pngUrl || dataUrl;
             img.style.cssText = 'position:absolute;' +
-                'left:' + leftPx + 'px;' +
-                'top:' + topPx + 'px;' +
-                'width:' + widthPx + 'px;' +
-                'height:' + heightPx + 'px;';
+                'left:' + metrics.left + 'px;' +
+                'top:' + metrics.top + 'px;' +
+                'width:' + metrics.width + 'px;' +
+                'height:' + metrics.height + 'px;';
             return img;
         }
         
-        // Capture current wave positions as static images BEFORE stopping animations
-        const backImg = await svgToStaticImg(waveBack);
+        // Capture current wave positions from original and convert to PNG for the clone
+        const backImg = await svgToStaticImg(originalWaveBack, backMetrics);
         backImg.style.zIndex = '1';
-        const mainImg = await svgToStaticImg(waveMain);
+        const mainImg = await svgToStaticImg(originalWaveMain, mainMetrics);
         mainImg.style.zIndex = '2';
         
-        // Save original wave overlay HTML (includes current fill attributes)
-        const originalWaveHTML = waveOverlay.innerHTML;
+        const clonedWaveOverlay = clone.querySelector('.wave-overlay');
+        clonedWaveOverlay.innerHTML = '';
+        clonedWaveOverlay.appendChild(backImg);
+        clonedWaveOverlay.appendChild(mainImg);
         
-        // Replace animated SVGs with static images
-        waveOverlay.innerHTML = '';
-        waveOverlay.appendChild(backImg);
-        waveOverlay.appendChild(mainImg);
-        
-        // Freeze logo animation
-        if (logo) {
-            logo.style.animation = 'none';
-            logo.style.transform = 'none';
+        const clonedLogo = clone.querySelector('#posterLogo');
+        if (clonedLogo) {
+            clonedLogo.style.animation = 'none';
+            clonedLogo.style.transform = 'none';
         }
 
-        // Convert paw SVG watermark to PNG in-place
-        const pawImgEl = document.getElementById('posterPaw');
-        let originalPawSrc = '';
-        if (pawImgEl) {
-            originalPawSrc = pawImgEl.src;
-            const pngUrl = await imgSvgToPng(pawImgEl);
+        // Convert paw SVG watermark inside the clone to PNG
+        const clonedPawImgEl = clone.querySelector('#posterPaw');
+        if (clonedPawImgEl) {
+            const pngUrl = await imgSvgToPng(clonedPawImgEl);
             if (pngUrl) {
-                pawImgEl.src = pngUrl;
+                clonedPawImgEl.src = pngUrl;
             }
         }
 
@@ -1103,14 +1108,12 @@
 
         try {
             await document.fonts.ready;
-            const canvas = await html2canvas(posterNode, { 
+            const canvas = await html2canvas(clone, { 
                 scale: 3,
                 useCORS: true,
                 width: 450,
                 height: 600
             });
-            
-            posterWrap.style.transform = originalTransform; 
             
             // 将生成的 base64 赋值给弹窗图片
             const resultImg = document.getElementById('resultImage');
@@ -1122,19 +1125,10 @@
             console.error("生成海报失败:", error);
             alert("海报生成失败，请稍后重试。");
         } finally {
-            // Restore original animated SVG waves
-            waveOverlay.innerHTML = originalWaveHTML;
-            if (logo) { logo.style.animation = ''; logo.style.transform = ''; }
-            
-            // Restore original paw SVG src
-            if (pawImgEl && originalPawSrc) {
-                pawImgEl.src = originalPawSrc;
+            // Remove the temporary wrapper
+            if (tempWrapper.parentNode) {
+                tempWrapper.parentNode.removeChild(tempWrapper);
             }
-            
-            posterWrap.style.transform = originalTransform;
-            // Force reflow to prevent animation jumping
-            void posterWrap.offsetWidth;
-            posterWrap.style.transition = originalTransition;
             exportBtn.textContent = originalBtnText;
             exportBtn.disabled = false;
         }
