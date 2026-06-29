@@ -19,7 +19,7 @@
     <style>
         :root {
             color-scheme: light;
-            --primary-color: #2c3e50;
+            --primary-color: #2e2c2d;
             --bg-color: #f5f6fa;
             --border-color: #dcdde1;
             --gender-bg: #D3DCE0;
@@ -48,16 +48,107 @@
 
         .form-section {
             flex: 1;
-            background-color: #fff !important;
-            background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZmYiLz48L3N2Zz4=") !important;
+            background-color: #fffbf3 !important;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><rect width='100%' height='100%' fill='%23fffbf3'/></svg>") !important;
             padding: 2rem;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             min-width: 320px;
-            color: #2c3e50;
+            color: #2e2c2d;
         }
 
         .form-group { margin-bottom: 1.5rem; }
+        .form-inline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .form-inline label {
+            margin-bottom: 0;
+            white-space: nowrap;
+            flex: 0 0 100px;
+            text-align: left;
+        }
+        .form-inline input, .form-inline select {
+            flex: 1;
+        }
+        .input-with-button {
+            display: flex;
+            flex: 1;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        .input-with-button input {
+            flex: 1;
+        }
+        .input-with-button .random-btn {
+            flex-shrink: 0;
+            white-space: nowrap;
+            padding: 0.6rem 1rem;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+        .pill-selector {
+            display: flex;
+            flex: 1;
+            background-color: var(--primary-color);
+            border-radius: 9999px;
+            padding: 2px;
+            overflow: hidden;
+        }
+        .selector-btn {
+            flex: 1;
+            border: none;
+            background: none;
+            padding: 0.6rem 1.2rem;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            color: #fff !important;
+            -webkit-text-fill-color: #fff !important;
+            border-radius: 9999px;
+            transition: all 0.2s ease;
+        }
+        .selector-btn.active {
+            background-color: #fff !important;
+            color: var(--primary-color) !important;
+            -webkit-text-fill-color: var(--primary-color) !important;
+        }
+        .upload-row-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .upload-column {
+            flex: 1;
+            display: flex;
+        }
+        .pill-upload-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary-color) !important;
+            color: #fff !important;
+            -webkit-text-fill-color: #fff !important;
+            border: 2px solid var(--primary-color);
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            white-space: nowrap;
+            user-select: none;
+        }
+        .pill-upload-btn:hover, .pill-upload-btn.uploaded {
+            background-color: #fff !important;
+            border-color: var(--primary-color) !important;
+            color: var(--primary-color) !important;
+            -webkit-text-fill-color: var(--primary-color) !important;
+        }
 
         label {
             display: block;
@@ -76,8 +167,8 @@
             border-radius: 4px;
             font-size: 1rem;
             background-color: #fff !important;
-            color: #2c3e50 !important;
-            -webkit-text-fill-color: #2c3e50 !important;
+            color: #2e2c2d !important;
+            -webkit-text-fill-color: #2e2c2d !important;
         }
 
         textarea { resize: vertical; height: 100px; }
@@ -361,17 +452,22 @@
         .export-btn:hover { background-color: #1a252f; }
 
         .random-btn {
-            background-color: var(--dot-bg);
-            color: #fff !important;
-            -webkit-text-fill-color: #fff !important;
-            border: none;
+            background-color: #fff !important;
+            color: var(--primary-color) !important;
+            -webkit-text-fill-color: var(--primary-color) !important;
+            border: 1px solid var(--border-color) !important;
             border-radius: 9999px;
             padding: 0.2rem 0.6rem;
             font-size: 0.8rem;
             cursor: pointer;
-            transition: opacity 0.2s;
+            transition: all 0.2s;
         }
-        .random-btn:hover { opacity: 0.8; }
+        .random-btn:hover, .random-btn:active {
+            background-color: var(--primary-color) !important;
+            border-color: var(--primary-color) !important;
+            color: #fff !important;
+            -webkit-text-fill-color: #fff !important;
+        }
 
         @media (max-width: 900px) {
             .container { flex-direction: column; }
@@ -467,57 +563,62 @@
         <div class="form-section">
             <div style="font-size: 0.85rem; color: #7f8c8d; font-weight: normal; font-family: system-ui, -apple-system, sans-serif; text-align: left; margin-bottom: 0.2rem; line-height: 1;">Project Harbor</div>
             <h2 style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; font-size: 24px;">输入宠物资料<img id="headerLogo" alt="Logo" style="height: 58px; display: inline-block; vertical-align: middle; border-radius: 50%; padding: 2px; background-color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.15);" /></h2>
-        <div class="form-group">
-            <label>上传照片</label>
-            <input type="file" id="inputPhoto" accept="image/png, image/jpeg, image/webp">
+        <div class="form-group upload-row-container">
+            <div class="upload-column">
+                <input type="file" id="inputPhoto" accept="image/png, image/jpeg, image/webp" style="display: none;">
+                <label for="inputPhoto" class="pill-upload-btn" id="labelPhoto">上传照片</label>
+            </div>
+            <div class="upload-column">
+                <input type="file" id="inputQRCode" accept="image/png, image/jpeg, image/webp" style="display: none;">
+                <label for="inputQRCode" class="pill-upload-btn" id="labelQRCode">上传二维码</label>
+            </div>
         </div>
-        <div class="form-group">
-            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 0.5rem;">
-                <label style="margin-bottom: 0;">名字</label>
+        <div class="form-group form-inline">
+            <label>名字</label>
+            <div class="input-with-button">
+                <input type="text" id="inputName" value="输入名字">
                 <button id="btnRandomName" type="button" class="random-btn">🎲 随机生成</button>
             </div>
-            <input type="text" id="inputName" value="输入名字">
         </div>
-        <div class="form-group">
+        <div class="form-group form-inline">
             <label>品种和性格</label>
             <input type="text" id="inputBreed" value="中华田园犬，亲人">
         </div>
-        <div class="form-group">
+        <div class="form-group form-inline">
             <label>性别</label>
-            <select id="inputGender">
-                <option value="弟弟">弟弟</option>
-                <option value="妹妹">妹妹</option>
-            </select>
+            <div class="pill-selector">
+                <button type="button" class="selector-btn active" data-value="弟弟">弟弟</button>
+                <button type="button" class="selector-btn" data-value="妹妹">妹妹</button>
+                <input type="hidden" id="inputGender" value="弟弟">
+            </div>
         </div>
-        <div class="form-group">
+        <div class="form-group form-inline">
             <label>年龄</label>
             <input type="text" id="inputAge" value="3个月">
         </div>
-        <div class="form-group">
+        <div class="form-group form-inline">
             <label>体重</label>
             <input type="text" id="inputWeight" value="3kg">
         </div>
-        <div class="form-group">
+        <div class="form-group form-inline">
             <label>疫苗情况</label>
-            <select id="inputVaccine">
-                <option value="已疫苗">已疫苗</option>
-                <option value="未疫苗">未疫苗</option>
-            </select>
+            <div class="pill-selector">
+                <button type="button" class="selector-btn active" data-value="已疫苗">已疫苗</button>
+                <button type="button" class="selector-btn" data-value="未疫苗">未疫苗</button>
+                <input type="hidden" id="inputVaccine" value="已疫苗">
+            </div>
         </div>
-        <div class="form-group">
+        <div class="form-group form-inline">
             <label>绝育情况</label>
-            <select id="inputSpay">
-                <option value="已绝育">已绝育</option>
-                <option value="未绝育">未绝育</option>
-            </select>
+            <div class="pill-selector">
+                <button type="button" class="selector-btn active" data-value="已绝育">已绝育</button>
+                <button type="button" class="selector-btn" data-value="未绝育">未绝育</button>
+                <input type="hidden" id="inputSpay" value="已绝育">
+            </div>
         </div>
         <div class="form-group">
             <label>Ta的故事</label>
             <textarea id="inputStory" placeholder="从小就在流浪狗基地生活的毛孩子，性格很亲人，每次去都没能把她接出来，这次终于能有机会给她一个不一样的狗生！">从小就在流浪狗基地生活的毛孩子，性格很亲人，每次去都没能把她接出来，这次终于能有机会给她一个不一样的狗生！</textarea>
-        </div>
-        <div class="form-group" style="margin-bottom: 2.5rem;">
-            <label>上传二维码</label>
-            <input type="file" id="inputQRCode" accept="image/png, image/jpeg, image/webp">
         </div>
     </div>
 
@@ -830,6 +931,21 @@
     });
     updateTheme();
 
+    document.querySelectorAll('.selector-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const container = this.closest('.pill-selector');
+            container.querySelectorAll('.selector-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            const val = this.getAttribute('data-value');
+            const hiddenInput = container.querySelector('input[type="hidden"]');
+            if (hiddenInput) {
+                hiddenInput.value = val;
+                hiddenInput.dispatchEvent(new Event('input'));
+                hiddenInput.dispatchEvent(new Event('change'));
+            }
+        });
+    });
+
     const renderPhoto = document.getElementById('renderPhoto');
     const zoomSlider = document.getElementById('zoomSlider');
     const zoomControlGroup = document.getElementById('zoomControlGroup');
@@ -882,6 +998,12 @@
 
                     renderPhoto.src = event.target.result;
                     applyImageTransform();
+
+                    const labelPhoto = document.getElementById('labelPhoto');
+                    if (labelPhoto) {
+                        labelPhoto.textContent = '已上传照片';
+                        labelPhoto.classList.add('uploaded');
+                    }
                 };
                 img.src = event.target.result;
             };
@@ -899,6 +1021,12 @@
                     // 更新全局原始二维码，并触发重绘
                     originalQRCodeImg = cropWhiteBorders(img);
                     applyQRCodeTheme();
+
+                    const labelQRCode = document.getElementById('labelQRCode');
+                    if (labelQRCode) {
+                        labelQRCode.textContent = '已上传二维码';
+                        labelQRCode.classList.add('uploaded');
+                    }
                 };
                 img.src = event.target.result;
             };
