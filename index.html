@@ -8,7 +8,7 @@
     <meta name="supported-color-schemes" content="light">
     <meta name="nightmode" content="disable">
     <meta name="force-dark-mode" content="false">
-    <title>宠物领养海报生成器 v1.2.1</title>
+    <title>宠物领养海报生成器 v1.3.1</title>
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     
     <!-- Yozai 字体调用 -->
@@ -20,7 +20,7 @@
         :root {
             color-scheme: light;
             --primary-color: #2e2c2d;
-            --bg-color: #f5f6fa;
+            --bg-color: #cfced4;
             --border-color: #dcdde1;
             --gender-bg: #D3DCE0;
             --dot-bg: #6B8798;
@@ -48,8 +48,9 @@
 
         .form-section {
             flex: 1;
-            background-color: #FFFEFCFF !important;
-            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><rect width='100%' height='100%' fill='%23FFFEFCFF'/></svg>") !important;
+            background-color: #e5e6eb !important;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><rect width='100%' height='100%' fill='%23e5e6eb'/></svg>") !important;
+            border: 1px solid #ffffff;
             padding: 2rem;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
@@ -87,7 +88,7 @@
             white-space: nowrap;
             padding: 0.6rem 1rem;
             font-size: 0.9rem;
-            font-weight: 700;
+            font-weight: 400;
         }
         .pill-selector {
             display: flex;
@@ -103,10 +104,10 @@
             background: none;
             padding: 0.6rem 1.2rem;
             font-size: 1rem;
-            font-weight: 700;
+            font-weight: 400;
             cursor: pointer;
-            color: #fff !important;
-            -webkit-text-fill-color: #fff !important;
+            color: #caccc2 !important;
+            -webkit-text-fill-color: #caccc2 !important;
             border-radius: 9999px;
             transition: all 0.2s ease;
         }
@@ -114,6 +115,9 @@
             background-color: #fff !important;
             color: var(--primary-color) !important;
             -webkit-text-fill-color: var(--primary-color) !important;
+        }
+        .selector-btn.active::before {
+            content: "✓ ";
         }
         .upload-row-container {
             display: flex;
@@ -135,7 +139,7 @@
             -webkit-text-fill-color: #fff !important;
             border: 2px solid var(--primary-color);
             border-radius: 9999px;
-            font-weight: 700;
+            font-weight: 400;
             font-size: 1rem;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -444,6 +448,7 @@
             border: none;
             border-radius: 9999px;
             font-size: 1.1rem;
+            font-weight: 400;
             cursor: pointer;
             transition: background 0.2s;
             width: 80%;
@@ -459,6 +464,7 @@
             border-radius: 9999px;
             padding: 0.2rem 0.6rem;
             font-size: 0.8rem;
+            font-weight: 400;
             cursor: pointer;
             transition: all 0.2s;
         }
@@ -527,7 +533,7 @@
             border: none;
             border-radius: 9999px;
             font-size: 1rem;
-            font-weight: 700;
+            font-weight: 400;
             cursor: pointer;
             transition: background 0.2s;
             font-family: inherit;
