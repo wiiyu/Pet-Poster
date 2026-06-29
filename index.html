@@ -48,8 +48,8 @@
 
         .form-section {
             flex: 1;
-            background-color: #fffbf3 !important;
-            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><rect width='100%' height='100%' fill='%23fffbf3'/></svg>") !important;
+            background-color: #FFFEFCFF !important;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><rect width='100%' height='100%' fill='%23FFFEFCFF'/></svg>") !important;
             padding: 2rem;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
@@ -244,7 +244,7 @@
             outline: none;
             /* Push down into info section so no seam gap is exposed */
             margin-bottom: -18px;
-            z-index: auto;
+            z-index: 3;
         }
 
         /* 新增：专属的照片裁剪隔离层，将照片严格切断，防止其延伸到海报最底部 */
@@ -263,7 +263,7 @@
             left: -2px;
             width: calc(100% + 4px);
             top: 0;
-            bottom: -20px; 
+            bottom: 0px; 
             pointer-events: none;
             z-index: 1;
             /* 經過抗誤差優化的 CSS 漸層：拉伸至頂部並調整 stop，消除 html2canvas 導出時邊緣產生的 1px 细线 */
@@ -377,7 +377,7 @@
             display: flex;
             flex-direction: column;
             position: relative;
-            z-index: 3;
+            z-index: 2;
             color: #4A4A4A !important;
             -webkit-text-fill-color: #4A4A4A !important;
         }
@@ -561,7 +561,7 @@
 <div class="main-wrapper" style="width: 100%; max-width: 1200px; display: flex; flex-direction: column; margin: 0 auto;">
     <div class="container">
         <div class="form-section">
-            <div style="font-size: 0.85rem; color: #7f8c8d; font-weight: normal; font-family: system-ui, -apple-system, sans-serif; text-align: left; margin-bottom: 0.2rem; line-height: 1;">Project Harbor</div>
+            <div style="font-size: 0.85rem; color: #7f8c8d; font-weight: normal; font-family: system-ui, -apple-system, sans-serif; text-align: left; margin-bottom: 0.2rem; line-height: 1;">Project Harbor v0.1.0</div>
             <h2 style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; font-size: 24px;">输入宠物资料<img id="headerLogo" alt="Logo" style="height: 58px; display: inline-block; vertical-align: middle; border-radius: 50%; padding: 2px; background-color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.15);" /></h2>
         <div class="form-group upload-row-container">
             <div class="upload-column">
@@ -644,10 +644,11 @@
                     <div class="wave-overlay">
                         <!-- Solid Wave Fill (Back Layer) -->
                         <svg class="wave-back-svg" width="200%" height="100%" viewBox="0 0 1000 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                            <path id="waveBackPath" fill="" fill-opacity="1" d="M 0 150 C 100 66, 150 276, 250 150 C 350 24, 400 234, 500 150 C 600 66, 650 276, 750 150 C 850 24, 900 234, 1000 150 L 1000 320 L 0 320 Z"></path>
+                            <path id="waveBackPath" fill="" fill-opacity="0.8" d="M 0 150 C 100 66, 150 276, 250 150 C 350 24, 400 234, 500 150 C 600 66, 650 276, 750 150 C 850 24, 900 234, 1000 150 L 1000 320 L 0 320 Z"></path>
                         </svg>
                         <!-- Solid Wave Fill (Front Layer) -->
                         <svg class="wave-main-svg" width="200%" height="100%" viewBox="0 0 1000 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M 0 150 C 100 66, 150 276, 250 150 C 350 24, 400 234, 500 150 C 600 66, 650 276, 750 150 C 850 24, 900 234, 1000 150" fill="none" stroke="#ffffff" stroke-width="2" vector-effect="non-scaling-stroke" opacity="0.9"></path>
                             <path id="wavePath" fill="" fill-opacity="1" d="M 0 150 C 100 66, 150 276, 250 150 C 350 24, 400 234, 500 150 C 600 66, 650 276, 750 150 C 850 24, 900 234, 1000 150 L 1000 320 L 0 320 Z"></path>
                         </svg>
                     </div>
@@ -1096,12 +1097,22 @@
 
     const singleChars = ["糯", "甜", "酥", "软", "脆", "蜜", "奶", "糖", "冰", "焦", "香", "豆", "麦", "果", "米"];
     const doubleChars = ["麻薯", "汤圆", "布丁", "蛋挞", "饼干", "馒头", "芝麻", "奶酪", "泡芙", "锅贴", "吐司", "薯条", "饭团", "蛋卷", "烧麦"];
+    const standaloneNames = [
+        "Muffin", "Cookie", "Peanut", "Bean", "Mocha", "Oreo", "Waffle", "Fudge", "Pepper", "Peach",
+        "Shadow", "Snowy", "Midnight", "Hazel", "Rusty", "Luna", "Daisy", "Willow", "Jasper", "Stella",
+        "Bella", "Charlie", "Max", "Milo", "Ruby", "Leo", "Jack", "Lily", "Toby", "Chloe", "Finn"
+    ];
 
     function generateRandomName() {
-        const singleIndex = Math.floor(Math.random() * singleChars.length);
-        const doubleIndex = Math.floor(Math.random() * doubleChars.length);
         const nameInput = document.getElementById('inputName');
-        nameInput.value = singleChars[singleIndex] + doubleChars[doubleIndex];
+        if (Math.random() < 0.5) {
+            const singleIndex = Math.floor(Math.random() * singleChars.length);
+            const doubleIndex = Math.floor(Math.random() * doubleChars.length);
+            nameInput.value = singleChars[singleIndex] + doubleChars[doubleIndex];
+        } else {
+            const randIndex = Math.floor(Math.random() * standaloneNames.length);
+            nameInput.value = standaloneNames[randIndex];
+        }
         nameInput.dispatchEvent(new Event('input'));
     }
     document.getElementById('btnRandomName').addEventListener('click', generateRandomName);
