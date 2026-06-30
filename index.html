@@ -19,7 +19,7 @@
     <style>
         :root {
             color-scheme: light;
-            --primary-color: #2e2c2d;
+            --primary-color: #6c696c;
             --bg-color: #cfced4;
             --border-color: #dcdde1;
             --gender-bg: #D3DCE0;
@@ -106,10 +106,11 @@
             font-size: 1rem;
             font-weight: 400;
             cursor: pointer;
-            color: #caccc2 !important;
-            -webkit-text-fill-color: #caccc2 !important;
+            color: #ece2e6 !important;
+            -webkit-text-fill-color: #ece2e6 !important;
             border-radius: 9999px;
             transition: all 0.2s ease;
+            white-space: nowrap;
         }
         .selector-btn.active {
             background-color: #fff !important;
@@ -478,6 +479,24 @@
         @media (max-width: 900px) {
             .container { flex-direction: column; }
             body { padding: 1rem; }
+        }
+
+        @media (max-width: 480px) {
+            .form-inline {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.5rem;
+            }
+            .form-inline label {
+                flex: none;
+                width: 100%;
+                text-align: left;
+            }
+        }
+
+        /* 所有按钮和胶囊选择器 1px 纯白高光外圈 */
+        .pill-upload-btn, .export-btn, .random-btn, .download-modal-btn, .close-modal-btn, .pill-selector {
+            box-shadow: 0 0 0 1px #ffffff !important;
         }
 
         /* 遮罩层与预览弹窗样式 */
